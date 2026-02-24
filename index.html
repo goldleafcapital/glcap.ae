@@ -1281,12 +1281,16 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = new FormData(form);
-            data.append('form-name', 'contact');
+
+            // Convert FormData to URLSearchParams for Netlify AJAX
+            const params = new URLSearchParams(data);
+            params.set('form-name', 'contact');
 
             try {
                 const res = await fetch("/", {
                     method: 'POST',
-                    body: data
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: params.toString()
                 });
                 if (res.ok) {
                     form.style.display = 'none';
