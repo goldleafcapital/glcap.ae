@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <title>Goldleaf Capital | Strategic Asset Management – Abu Dhabi</title>
+    <meta name="description"
+        content="Goldleaf Capital – Where vision meets legacy. A private investment office based in Abu Dhabi specialising in strategic asset management and capital preservation.">
+    <meta name="keywords"
+        content="Goldleaf Capital, asset management, Abu Dhabi, capital preservation, private investment, wealth management">
+    <meta property="og:title" content="Goldleaf Capital | Strategic Asset Management">
+    <meta property="og:description" content="Where vision meets legacy. A private investment office in Abu Dhabi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://glcap.ae">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ──────────────────────────────────────────
+           DESIGN TOKENS
+           ────────────────────────────────────────── */
+        :root {
+            --gold: #B08D57;
+            --gold-light: #C9A96E;
+            --gold-dark: #8A6D3B;
+            --charcoal: #111111;
+            --dark-grey: #1A1A1A;
+            --mid-grey: #2D2D2D;
+            --card-bg: #1E1E1E;
+            --off-white: #F5F0EB;
+            --muted-text: #A0998F;
+            --navy: #1B2A4A;
+            --navy-deep: #0F1C33;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ──────────────────────────────────────────
+           RESET & BASE
+           ────────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--charcoal);
+            color: var(--off-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--gold-light);
+        }
+
+        /* ──────────────────────────────────────────
+           REVEAL ANIMATION
+           ────────────────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.15s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.30s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.45s;
+        }
+
+        /* ──────────────────────────────────────────
+           NAVIGATION
+           ────────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 3rem;
+            transition: background 0.5s ease, padding 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(17, 17, 17, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.85rem 3rem;
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .nav-logo span {
+            color: var(--off-white);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--off-white);
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.35s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger */
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--off-white);
+            margin: 6px 0;
+            transition: all 0.35s ease;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ──────────────────────────────────────────
+           HERO
+           ────────────────────────────────────────── */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('images/hero.png') center center / cover no-repeat;
+            filter: brightness(0.45) saturate(0.8);
+            transform: scale(1.08);
+            transition: transform 12s ease-out;
+        }
+
+        .hero.loaded .hero-bg {
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(17, 17, 17, 0.55) 0%,
+                    rgba(17, 17, 17, 0.2) 40%,
+                    rgba(17, 17, 17, 0.65) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(176, 141, 87, 0.35);
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s 0.3s both;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s 0.5s both;
+        }
+
+        .hero-title em {
+            display: block;
+            font-size: 0.8em;
+            font-style: normal;
+            color: var(--off-white);
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--muted-text);
+            letter-spacing: 0.08em;
+            max-width: 540px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 1s 0.7s both;
+        }
+
+        .hero-line {
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto;
+            animation: scaleIn 1s 0.9s both;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            animation: fadeIn 1s 1.5s both;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted-text);
+        }
+
+        .scroll-mouse {
+            width: 20px;
+            height: 32px;
+            border: 1.5px solid var(--gold);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 1px;
+            animation: scrollPulse 2s infinite;
+        }
+
+        /* ──────────────────────────────────────────
+           SECTION SHARED STYLES
+           ────────────────────────────────────────── */
+        section {
+            padding: 7rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-heading {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            color: var(--off-white);
+        }
+
+        .section-divider {
+            width: 45px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--muted-text);
+            line-height: 1.85;
+            max-width: 620px;
+        }
+
+        /* ──────────────────────────────────────────
+           ABOUT SECTION
+           ────────────────────────────────────────── */
+        .about {
+            background: var(--dark-grey);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            filter: brightness(0.85) saturate(0.9);
+            transition: transform 0.8s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.04);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(176, 141, 87, 0.15);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(176, 141, 87, 0.15);
+        }
+
+        .stat-item {}
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--muted-text);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        /* ──────────────────────────────────────────
+           PHILOSOPHY SECTION
+           ────────────────────────────────────────── */
+        .philosophy {
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .philosophy-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .philosophy-header .section-text {
+            margin: 0 auto;
+        }
+
+        .philosophy-header .section-divider {
+            margin: 0 auto 2rem;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .pillar-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(176, 141, 87, 0.08);
+            border-radius: 6px;
+            padding: 2.8rem 2rem;
+            text-align: center;
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(176, 141, 87, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .pillar-card:hover::before {
+            opacity: 1;
+        }
+
+        .pillar-icon {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pillar-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.2;
+        }
+
+        .pillar-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--off-white);
+            margin-bottom: 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        .pillar-text {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--muted-text);
+            line-height: 1.75;
+        }
+
+        /* ──────────────────────────────────────────
+           PARALLAX IMAGE BREAK
+           ────────────────────────────────────────── */
+        .image-break {
+            height: 45vh;
+            min-height: 320px;
+            background: url('images/mangrove.png') center center / cover no-repeat fixed;
+            position: relative;
+        }
+
+        .image-break::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    var(--charcoal) 0%,
+                    rgba(17, 17, 17, 0.3) 30%,
+                    rgba(17, 17, 17, 0.3) 70%,
+                    var(--dark-grey) 100%);
+        }
+
+        .image-break-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .image-break-quote {
+            font-family: var(--font-serif);
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--off-white);
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        .image-break-quote span {
+            color: var(--gold);
+        }
+
+        /* ──────────────────────────────────────────
+           CONTACT SECTION
+           ────────────────────────────────────────── */
+        .contact {
+            background: var(--dark-grey);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {}
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border: 1px solid rgba(176, 141, 87, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .contact-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .contact-item-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item-value {
+            font-size: 0.92rem;
+            color: var(--off-white);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ──────────────────────────────────────────
+           CONTACT FORM
+           ────────────────────────────────────────── */
+        .contact-form {}
+
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+
+        .form-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted-text);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(176, 141, 87, 0.15);
+            border-radius: 4px;
+            color: var(--off-white);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 300;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--gold);
+            background: rgba(176, 141, 87, 0.04);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(160, 153, 143, 0.5);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+        }
+
+        .form-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.95rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.4s ease;
+            margin-top: 0.5rem;
+        }
+
+        .form-submit:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .form-submit svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+            transition: transform 0.3s ease;
+        }
+
+        .form-submit:hover svg {
+            transform: translateX(4px);
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        .form-success-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleInBounce 0.5s ease;
+        }
+
+        .form-success-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .form-success h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--off-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-success p {
+            font-size: 0.88rem;
+            color: var(--muted-text);
+            font-weight: 300;
+        }
+
+        /* ──────────────────────────────────────────
+           FOOTER
+           ────────────────────────────────────────── */
+        .footer {
+            background: var(--charcoal);
+            border-top: 1px solid rgba(176, 141, 87, 0.08);
+            padding: 3rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--muted-text);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* ──────────────────────────────────────────
+           KEYFRAMES
+           ────────────────────────────────────────── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: translate(-50%, 8px);
+            }
+        }
+
+        @keyframes scaleInBounce {
+            0% {
+                transform: scale(0);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ──────────────────────────────────────────
+           RESPONSIVE
+           ────────────────────────────────────────── */
+        @media (max-width: 900px) {
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .pillar-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+
+            .about-image img {
+                height: 300px;
+            }
+
+            .about-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.7rem 1.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: rgba(17, 17, 17, 0.97);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            section {
+                padding: 4.5rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+
+            .image-break {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════
+         NAVIGATION
+         ═══════════════════════════════════════════ -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">GOLDLEAF <span>CAPITAL</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeNav()">About</a></li>
+            <li><a href="#philosophy" onclick="closeNav()">Philosophy</a></li>
+            <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Abu Dhabi · Est. Private Office</div>
+            <h1 class="hero-title">GOLDLEAF <em>CAPITAL</em></h1>
+            <p class="hero-subtitle">Where vision meets legacy.</p>
+            <div class="hero-line"></div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-mouse"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ABOUT
+         ═══════════════════════════════════════════ -->
+    <section class="about" id="about">
+        <div class="section-inner">
+            <div class="about-grid">
+                <div class="reveal">
+                    <div class="section-label">About</div>
+                    <h2 class="section-heading">Strategic Asset Management & Capital Preservation</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-text">
+                        Goldleaf Capital is a private investment office headquartered in Abu Dhabi's prestigious Sky
+                        Tower on Al Reem Island. We take a measured, long-term approach to managing diversified
+                        portfolios across global markets — balancing growth with prudent risk management.
+                    </p>
+                    <p class="section-text" style="margin-top:1rem;">
+                        Our mandate centres on capital preservation, strategic allocation, and the pursuit of enduring
+                        value across asset classes and market cycles.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item reveal reveal-delay-1">
+                            <div class="stat-number">Multi‑Asset</div>
+                            <div class="stat-label">Portfolio Strategy</div>
+                        </div>
+                        <div class="stat-item reveal reveal-delay-2">
+                            <div class="stat-number">Abu Dhabi</div>
+                            <div class="stat-label">Headquartered</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image reveal reveal-delay-2">
+                    <img src="images/texture.png" alt="Goldleaf Capital office aesthetic">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PHILOSOPHY
+         ═══════════════════════════════════════════ -->
+    <section class="philosophy" id="philosophy">
+        <div class="section-inner">
+            <div class="philosophy-header reveal">
+                <div class="section-label">Our Approach</div>
+                <h2 class="section-heading">Investment Philosophy</h2>
+                <div class="section-divider"></div>
+                <p class="section-text">
+                    We believe lasting wealth is built through disciplined allocation, rigorous analysis, and patient
+                    capital deployment across carefully selected asset classes.
+                </p>
+            </div>
+            <div class="pillar-grid">
+                <!--  Card 1  -->
+                <div class="pillar-card reveal reveal-delay-1">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="20" />
+                            <path d="M16 28l6-10 5 7 5-13" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="pillar-title">Diversified Allocation</h3>
+                    <p class="pillar-text">Strategic exposure across real estate, equities, fixed income, commodities,
+                        and digital assets — calibrated for resilience and opportunity.</p>
+                </div>
+                <!--  Card 2  -->
+                <div class="pillar-card reveal reveal-delay-2">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 4v40M4 24h40" stroke-linecap="round" />
+                            <circle cx="24" cy="24" r="10" />
+                            <circle cx="24" cy="24" r="20" />
+                        </svg>
+                    </div>
+                    <h3 class="pillar-title">Capital Preservation</h3>
+                    <p class="pillar-text">A conservative framework that prioritises the protection of principal while
+                        systematically pursuing risk-adjusted returns.</p>
+                </div>
+                <!--  Card 3  -->
+                <div class="pillar-card reveal reveal-delay-3">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 40 L18 20 L28 28 L40 8" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="40" cy="8" r="3" />
+                            <path d="M4 44h40" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3 class="pillar-title">Long-Term Vision</h3>
+                    <p class="pillar-text">Patient, conviction-driven deployment with a generational perspective —
+                        focused on compounding value across economic cycles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PARALLAX IMAGE BREAK
+         ═══════════════════════════════════════════ -->
+    <div class="image-break">
+        <div class="image-break-content">
+            <p class="image-break-quote reveal">
+                "The art of wealth lies not in its accumulation, but in its <span>preservation</span> and purposeful
+                cultivation."
+            </p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT
+         ═══════════════════════════════════════════ -->
+    <section class="contact" id="contact">
+        <div class="section-inner">
+            <div class="contact-grid">
+                <!-- Left: Info -->
+                <div class="reveal">
+                    <div class="section-label">Get In Touch</div>
+                    <h2 class="section-heading">Contact Us</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-text" style="margin-bottom:2.5rem;">
+                        We welcome your enquiry. Reach out to our Abu Dhabi office directly, or send us a message using
+                        the form.
+                    </p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Telephone</div>
+                            <div class="contact-item-value"><a href="tel:+97122358351">+971 2 235 8351</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <polyline points="22,6 12,13 2,6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Email</div>
+                            <div class="contact-item-value"><a href="mailto:contact@glcap.ae">contact@glcap.ae</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Location</div>
+                            <div class="contact-item-value">Office 1206, Sky Tower<br>Al Reem Island, Abu Dhabi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="reveal reveal-delay-2">
+                    <form id="contactForm" class="contact-form" name="contact" data-netlify="true" method="POST">
+                        <input type="hidden" name="_subject" value="New enquiry from glcap.ae">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="fname">Full Name</label>
+                                <input class="form-input" type="text" id="fname" name="name" placeholder="Your name"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="femail">Email Address</label>
+                                <input class="form-input" type="email" id="femail" name="email"
+                                    placeholder="you@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="fmessage">Message</label>
+                            <textarea class="form-textarea" id="fmessage" name="message"
+                                placeholder="How can we assist you?" required></textarea>
+                        </div>
+                        <button class="form-submit" type="submit">
+                            Send Message
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="5" y1="12" x2="19" y2="12" stroke-linecap="round" />
+                                <polyline points="12 5 19 12 12 19" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="form-success" id="formSuccess">
+                        <div class="form-success-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3>Message Sent</h3>
+                        <p>Thank you for reaching out. We will respond at our earliest convenience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">Goldleaf Capital</div>
+            <div class="footer-text">© 2026 Goldleaf Capital Ltd. All rights reserved. · Sky Tower, Al Reem Island, Abu
+                Dhabi</div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════
+         SCRIPTS
+         ═══════════════════════════════════════════ -->
+    <script>
+        /* ── Nav scroll effect ── */
+        const nav = document.getElementById('nav');
+        const hero = document.getElementById('hero');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* ── Hero zoom on load ── */
+        window.addEventListener('load', () => {
+            hero.classList.add('loaded');
+        });
+
+        /* ── Mobile nav toggle ── */
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+        function closeNav() {
+            navToggle.classList.remove('active');
+            navLinks.classList.remove('open');
+        }
+
+        /* ── Intersection Observer for reveals ── */
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        /* ── Contact Form (Formspree) ── */
+        const form = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            data.append('form-name', 'contact');
+
+            try {
+                const res = await fetch("/", {
+                    method: 'POST',
+                    body: data
+                });
+                if (res.ok) {
+                    form.style.display = 'none';
+                    formSuccess.classList.add('show');
+                } else {
+                    alert('Something went wrong. Please email us directly at contact@glcap.ae');
+                }
+            } catch {
+                alert('Network error. Please email us directly at contact@glcap.ae');
+            }
+        });
+
+        /* ── Smooth anchor offset for fixed nav ── */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: pos, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
