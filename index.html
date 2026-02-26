@@ -1173,7 +1173,8 @@
                         </div>
                         <div>
                             <div class="contact-item-label">Email</div>
-                            <div class="contact-item-value"><a href="mailto:contact@glcap.ae">contact@glcap.ae</a></div>
+                            <div class="contact-item-value"><a
+                                    href="mailto:contact@goldleaf.capital">contact@goldleaf.capital</a></div>
                         </div>
                     </div>
 
@@ -1195,7 +1196,7 @@
                 <!-- Right: Form -->
                 <div class="reveal reveal-delay-2">
                     <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeelvjzv" method="POST">
-                        <input type="hidden" name="_subject" value="New enquiry from glcap.ae">
+                        <input type="hidden" name="_subject" value="New enquiry from goldleaf.capital">
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label" for="fname">Full Name</label>
@@ -1305,10 +1306,10 @@
                     formSuccess.classList.add('show');
                 } else {
                     const errorMsg = await res.json();
-                    alert(errorMsg.errors ? errorMsg.errors.map(e => e.message).join(', ') : 'Something went wrong. Please email us directly at contact@glcap.ae');
+                    alert(errorMsg.errors ? errorMsg.errors.map(e => e.message).join(', ') : 'Something went wrong. Please email us directly at contact@goldleaf.capital');
                 }
-            } catch {
-                alert('Network error. Please email us directly at contact@glcap.ae');
+            } catch (err) {
+                alert('Network error. Please email us directly at contact@goldleaf.capital');
             }
         });
 
